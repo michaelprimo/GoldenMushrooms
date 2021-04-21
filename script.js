@@ -199,6 +199,11 @@ function f_mushroom_poison()
     else if(turns > 0)
     {
         turns = Math.floor(turns/2);
+        if(turns < 1)
+        {
+            alert("you lose");
+            window.location.reload(true);
+        }
     }
     else
     {
