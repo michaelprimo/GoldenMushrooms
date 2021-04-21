@@ -7,15 +7,18 @@ let mushroom_poison = 6;
 let mushroom_golden = 7;
 
 let points = 0;
-let turns = 10;
 
 let shield_find = 0;
 let golden_find = 0;
 let poison_find = 0;
 
+load_goldenArray(goldenBoard);
+load_mainParameters();
 load_mainArray(mainBoard);
-load_goldenArray(goldenBoard)
 shuffleArray(mainBoard);
+
+let max_turns = 26 - mushroom_golden;
+let turns = mushroom_golden + Math.floor(Math.random() * (max_turns));
 
 let grid_element = document.querySelectorAll(".grid_element");
 let main_grid = document.querySelectorAll("#main_grid");
@@ -58,7 +61,6 @@ function reveal(num)
         {
             f_mushroom_poison();
             grid_element[num].className = "grid_element animatePoison";
-            removeTurn();
             break;
         }
         case 4:
@@ -94,17 +96,61 @@ function load_mainArray(a)
 
 function load_goldenArray(a)
 {
-    let maxPoints = 10000;
+    let randPoints = 24;
+    let maxPoints = 8;
     let curPoints = 0;
-    for(let i = 1; i < mushroom_golden; i++)
+    for(let i = 0; i < 4; i++)
     {
-        curPoints = Math.floor(Math.random() * Math.floor(maxPoints/mushroom_golden)) + 1;
-        a.push(curPoints);
-        maxPoints -= curPoints;
+        if(i == 3)
+        {
+            randPoints++;
+            a.push(randPoints);
+        }
+        else
+        {
+            curPoints = Math.floor(Math.random() * maxPoints) + 1;
+            if(curPoints < 1)
+            {
+                curPoints = 1;
+            }
+            a.push(curPoints);
+            
+            randPoints -= curPoints;
+        }
+        console.log("i: " + i + " curPoints: " + curPoints + " randPoints: " + randPoints);
         curPoints = 0;
+    }    
+    shuffleArray(a);
+}
+
+function load_mainParameters()
+{
+    for(let i = 0; i < goldenBoard.length; i++)
+    {
+        switch(i)
+        {
+            case 0:
+            {
+                mushroom_nothing = goldenBoard[0];
+                break;
+            }
+            case 1:
+            {
+                mushroom_shield = goldenBoard[1];
+                break;
+            }
+            case 2:
+            {
+                mushroom_poison = goldenBoard[2];
+                break;
+            }
+            case 3:
+            {
+                mushroom_golden = goldenBoard[3];
+                break;
+            }
+        }
     }
-    a.push(maxPoints);
-    a.reverse();
 }
 
 /**
@@ -183,3 +229,28 @@ function removeTurn()
 }
 
 show_UI();
+
+// Get the modal
+var modal = document.getElementsByClassName('modal');
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close");
+
+// When the user clicks on <span> (x), close the modal
+span[0].onclick = function() {
+    modal[0].style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+/*
+window.onload = function(event) 
+{
+  modal[0].style.display = "block";
+}
+*/
