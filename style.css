@@ -152,11 +152,11 @@ body
 .side_A
 {
     flex-direction: row;
-    margin-right: 5em;
+    /*margin-right: 5em;*/
 }
 
 .side_B
 {
     flex-direction: row-reverse;
-    margin-left: 5em;
+    /*margin-left: 5em;*/
 }
