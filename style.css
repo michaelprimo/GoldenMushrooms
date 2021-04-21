@@ -1,0 +1,123 @@
+body
+{
+    background-color: darkgreen;
+    background-image: url(img/mushroom_fields.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#main_container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 100vh;
+}
+
+#main_grid
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.grid_element
+{
+    border: 1px solid black;
+    width: 5em;
+    height: 5em;
+}
+
+@media only screen and (max-width: 576px) 
+{
+    .grid_element
+    {
+        width: 3em;
+        height: 3em;
+    }
+}
+
+.animateNothing
+{
+    animation-name: animateNothing;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateGolden
+{
+    animation-name: animateGolden;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateShield
+{
+    animation-name: animateShield;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animatePoison
+{
+    animation-name: animatePoison;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+@keyframes animateNothing {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+}
+
+@keyframes animateGolden {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+}
+
+@keyframes animateShield {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+}
+
+@keyframes animatePoison {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+}
+
+.ghost
+{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    display: flex;
+    margin-top: 10%;
+}
