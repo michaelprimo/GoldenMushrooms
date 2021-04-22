@@ -199,8 +199,8 @@ function f_mushroom_poison()
     }
     else if(turns > 0)
     {
-        turns = Math.round(turns/2);
         removeTurn();
+        turns = Math.round(turns/2);
         if(turns < 1)
         {
             loseGame();
