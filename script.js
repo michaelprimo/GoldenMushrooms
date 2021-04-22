@@ -74,7 +74,7 @@ function reveal(num)
             break;
         }
     }
-    mainBoard[num] = 0;
+    //mainBoard[num] = 0;
 }
 
 function load_mainArray(a)
