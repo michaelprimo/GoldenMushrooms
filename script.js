@@ -74,7 +74,7 @@ function reveal(num)
             break;
         }
     }
-    //mainBoard[num] = 0;
+    mainBoard[num] = 0;
 }
 
 function load_mainArray(a)
@@ -331,7 +331,7 @@ show_UI();
 
 function restartLevel()
 {
-    //shuffleArray(mainBoard);
+    shuffleArray(mainBoard);
     removeClass();
     setTimeout(() => {  revealMushrooms_full(); }, 20);
     
