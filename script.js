@@ -345,6 +345,7 @@ function randomLevel()
     shuffleArray(mainBoard);
     removeClass();
     setTimeout(() => {  revealMushrooms_full(); }, 20);
+    show_UI();
 }
 
 function removeClass()
