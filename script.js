@@ -24,7 +24,7 @@ let grid_element = document.querySelectorAll(".grid_element");
 let main_grid = document.querySelectorAll("#main_grid");
 
 let text_UI = document.querySelectorAll(".text_UI");
-text_UI[text_UI.length-1].innerHTML = "Random Level!";
+text_UI[text_UI.length-1].innerHTML = "";
 
 let golden_UI = document.querySelector("#golden_UI");
 let poison_UI = document.querySelector("#poison_UI");
