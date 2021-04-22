@@ -21,6 +21,7 @@ let max_turns = 26 - mushroom_golden;
 let turns = mushroom_golden + Math.floor(Math.random() * (max_turns));
 
 let grid_element = document.querySelectorAll(".grid_element");
+let ghost = document.querySelectorAll(".ghost");
 let main_grid = document.querySelectorAll("#main_grid");
 
 let text_UI = document.querySelectorAll(".text_UI");
@@ -74,6 +75,7 @@ function reveal(num)
             break;
         }
     }
+    mainBoard[num] = 0;
 }
 
 function load_mainArray(a)
@@ -199,8 +201,14 @@ function f_mushroom_poison()
     }
     else if(turns > 0)
     {
-        removeTurn();
-        turns = Math.round(turns/2);
+        if(turns == 1)
+        {
+            turns--;
+        }
+        else
+        {
+            turns = Math.floor(turns/2);
+        }
         if(turns < 1)
         {
             loseGame();
@@ -281,7 +289,43 @@ function revealMushrooms()
     }
 }
 
+function revealMushrooms_full()
+{
+    for(let i = 0; i < grid_element.length; i++)
+    {
+        switch(mainBoard[i])
+        {
+            case 0:
+            {
+               
+                break;
+            }
+            case 1:
+            {
+                grid_element[i].className = "grid_element animateNothing_full";
+                break;
+            }
+            case 2:
+            {
+                grid_element[i].className = "grid_element animateShield_full";
+                break;
+            }
+            case 3:
+            {
+                grid_element[i].className = "grid_element animatePoison_full";
+                break;
+            }
+            case 4:
+            {
+                grid_element[i].className = "grid_element animateGolden_full";
+                break;
+            }
+        } 
+    }
+}
+
 show_UI();
+revealMushrooms_full();
 
 // Get the modal
 var modal = document.getElementsByClassName('modal');

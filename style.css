@@ -73,6 +73,38 @@ body
     transform: perspective(1000px) rotateY(180deg);
 }
 
+.animateNothing_full
+{
+    animation-name: animateNothing_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateGolden_full
+{
+    animation-name: animateGolden_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateShield_full
+{
+    animation-name: animateShield_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animatePoison_full
+{
+    animation-name: animatePoison_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
 @keyframes animateNothing {
     0% {
         transform: perspective(1000px) rotateY(0deg);
@@ -110,6 +142,58 @@ body
     100% {
         transform: perspective(1000px) rotateY(180deg);
         content:url(img/mushroom_poison.png);
+    }
+}
+
+@keyframes animateNothing_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animateGolden_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animateShield_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animatePoison_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
     }
 }
 
@@ -237,3 +321,108 @@ body
     color: white;
     text-align: center;
   }
+
+  .memory_nothing
+  {
+    -webkit-animation-name: memory_nothing;
+    -webkit-animation-duration: 1s;
+    animation-name: memory_nothing;
+    animation-duration: 1s;
+  }
+
+  .memory_shield
+  {
+    -webkit-animation-name: memory_shield;
+    -webkit-animation-duration: 1s;
+    animation-name: memory_shield;
+    animation-duration: 1s
+  }
+
+  .memory_poison
+  {
+    -webkit-animation-name: memory_poison;
+    -webkit-animation-duration: 1s;
+    animation-name: memory_poison;
+    animation-duration: 1s
+  }
+
+  .memory_golden
+  {
+    -webkit-animation-name: memory_golden;
+    -webkit-animation-duration: 10s;
+    animation-name: memory_golden;
+    animation-duration: 10s;
+  }
+
+  @keyframes memory {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+
+@keyframes memory_nothing {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
+
+@keyframes memory_shield {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
+
+@keyframes memory_poison {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
+
+
+@keyframes memory_golden {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
