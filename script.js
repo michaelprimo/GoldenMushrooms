@@ -243,14 +243,14 @@ function loseGame()
 {
     text_UI[text_UI.length-1].innerHTML = "You lose!";
     revealMushrooms();
-    //setTimeout(function(){ window.location.reload(true); }, 3000);
+    setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
 function winGame()
 {
     text_UI[text_UI.length-1].innerHTML = "You win!";
     revealMushrooms();
-    //setTimeout(function(){ window.location.reload(true); }, 3000);
+    setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
 function revealMushrooms()
