@@ -23,6 +23,9 @@ let turns = mushroom_golden + Math.floor(Math.random() * (max_turns));
 let grid_element = document.querySelectorAll(".grid_element");
 let main_grid = document.querySelectorAll("#main_grid");
 
+let text_UI = document.querySelectorAll(".text_UI");
+text_UI[text_UI.length-1].innerHTML = "Random Level!";
+
 let golden_UI = document.querySelector("#golden_UI");
 let poison_UI = document.querySelector("#poison_UI");
 let shield_UI = document.querySelector("#shield_UI");
@@ -71,7 +74,6 @@ function reveal(num)
             break;
         }
     }
-    mainBoard[num] = 0;
 }
 
 function load_mainArray(a)
@@ -184,8 +186,7 @@ function f_mushroom_golden()
     golden_find++;
     if(golden_find >= mushroom_golden)
     {
-        alert("You win!");
-        window.location.reload(true);
+        winGame();
     }
     show_UI();
 }
@@ -198,17 +199,16 @@ function f_mushroom_poison()
     }
     else if(turns > 0)
     {
-        turns = Math.floor(turns/2);
+        turns = Math.round(turns/2);
+        removeTurn();
         if(turns < 1)
         {
-            alert("you lose");
-            window.location.reload(true);
+            loseGame();
         }
     }
     else
     {
-        alert("you lose");
-        window.location.reload(true);
+        loseGame();
     }
     poison_find++;
     show_UI();
@@ -227,10 +227,58 @@ function removeTurn()
     turns--;
     if(turns <= 0)
     {
-        alert("you lose");
-        window.location.reload(true);
+        loseGame();
     }
     show_UI();
+}
+
+function loseGame()
+{
+    text_UI[text_UI.length-1].innerHTML = "You lose!";
+    revealMushrooms();
+    setTimeout(function(){ window.location.reload(true); }, 3000);
+}
+
+function winGame()
+{
+    text_UI[text_UI.length-1].innerHTML = "You win!";
+    revealMushrooms();
+    setTimeout(function(){ window.location.reload(true); }, 3000);
+}
+
+function revealMushrooms()
+{
+    for(let i = 0; i < grid_element.length; i++)
+    {
+        switch(mainBoard[i])
+        {
+            case 0:
+            {
+               
+                break;
+            }
+            case 1:
+            {
+                grid_element[i].className = "grid_element animateNothing";
+                break;
+            }
+            case 2:
+            {
+                grid_element[i].className = "grid_element animateShield";
+                break;
+            }
+            case 3:
+            {
+                grid_element[i].className = "grid_element animatePoison";
+                break;
+            }
+            case 4:
+            {
+                grid_element[i].className = "grid_element animateGolden";
+                break;
+            }
+        } 
+    }
 }
 
 show_UI();
