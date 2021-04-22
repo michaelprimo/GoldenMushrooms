@@ -12,10 +12,7 @@ let shield_find = 0;
 let golden_find = 0;
 let poison_find = 0;
 
-load_goldenArray(goldenBoard);
-load_mainParameters();
-load_mainArray(mainBoard);
-shuffleArray(mainBoard);
+
 
 let max_turns = 26 - mushroom_golden;
 let turns = mushroom_golden + Math.floor(Math.random() * (max_turns));
@@ -32,6 +29,8 @@ let poison_UI = document.querySelector("#poison_UI");
 let shield_UI = document.querySelector("#shield_UI");
 let nothing_UI = document.querySelector("#nothing_UI");
 
+
+randomLevel();
 /*
     var btn = document.createElement("BUTTON");
     btn.innerHTML = "CLICK ME";
@@ -75,7 +74,7 @@ function reveal(num)
             break;
         }
     }
-    mainBoard[num] = 0;
+    //mainBoard[num] = 0;
 }
 
 function load_mainArray(a)
@@ -244,14 +243,14 @@ function loseGame()
 {
     text_UI[text_UI.length-1].innerHTML = "You lose!";
     revealMushrooms();
-    setTimeout(function(){ window.location.reload(true); }, 3000);
+    //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
 function winGame()
 {
     text_UI[text_UI.length-1].innerHTML = "You win!";
     revealMushrooms();
-    setTimeout(function(){ window.location.reload(true); }, 3000);
+    //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
 function revealMushrooms()
@@ -267,22 +266,26 @@ function revealMushrooms()
             }
             case 1:
             {
-                grid_element[i].className = "grid_element animateNothing";
+                grid_element[i].classList.remove("animateNothing");
+                grid_element[i].classList.add("animateNothing");
                 break;
             }
             case 2:
             {
-                grid_element[i].className = "grid_element animateShield";
+                grid_element[i].classList.remove("animateShield");
+                grid_element[i].classList.add("animateShield");
                 break;
             }
             case 3:
             {
-                grid_element[i].className = "grid_element animatePoison";
+                grid_element[i].classList.remove("animatePoison");
+                grid_element[i].classList.add("animatePoison");
                 break;
             }
             case 4:
             {
-                grid_element[i].className = "grid_element animateGolden";
+                grid_element[i].classList.remove("animateGolden");
+                grid_element[i].classList.add("animateGolden");
                 break;
             }
         } 
@@ -302,22 +305,22 @@ function revealMushrooms_full()
             }
             case 1:
             {
-                grid_element[i].className = "grid_element animateNothing_full";
+                grid_element[i].classList.add("animateNothing_full");
                 break;
             }
             case 2:
             {
-                grid_element[i].className = "grid_element animateShield_full";
+                grid_element[i].classList.add("animateShield_full");
                 break;
             }
             case 3:
             {
-                grid_element[i].className = "grid_element animatePoison_full";
+                grid_element[i].classList.add("animatePoison_full");
                 break;
             }
             case 4:
             {
-                grid_element[i].className = "grid_element animateGolden_full";
+                grid_element[i].classList.add("animateGolden_full");
                 break;
             }
         } 
@@ -325,6 +328,41 @@ function revealMushrooms_full()
 }
 
 show_UI();
+
+function restartLevel()
+{
+    //shuffleArray(mainBoard);
+    removeClass();
+    setTimeout(() => {  revealMushrooms_full(); }, 20);
+    
+}
+
+function randomLevel()
+{
+    load_goldenArray(goldenBoard);
+    load_mainParameters();
+    load_mainArray(mainBoard);
+    shuffleArray(mainBoard);
+    removeClass();
+    setTimeout(() => {  revealMushrooms_full(); }, 20);
+}
+
+function removeClass()
+{
+    for(let i = 0; i < grid_element.length; i++)
+    {
+        grid_element[i].classList.remove("animateNothing");
+        grid_element[i].classList.remove("animateShield");
+        grid_element[i].classList.remove("animatePoison");
+        grid_element[i].classList.remove("animateGolden");
+        grid_element[i].classList.remove("animateNothing_full");
+        grid_element[i].classList.remove("animateShield_full");
+        grid_element[i].classList.remove("animatePoison_full");
+        grid_element[i].classList.remove("animateGolden_full");
+    }
+}
+
+revealMushrooms();
 revealMushrooms_full();
 
 // Get the modal
