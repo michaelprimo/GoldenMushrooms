@@ -124,6 +124,7 @@ function load_goldenArray(a)
         curPoints = 0;
     }    
     shuffleArray(a);
+    console.log(randPoints);
 }
 
 function load_mainParameters()
@@ -243,14 +244,16 @@ function loseGame()
 {
     text_UI[text_UI.length-1].innerHTML = "You lose!";
     revealMushrooms();
-    setTimeout(function(){ window.location.reload(true); }, 3000);
+    disableMushrooms();
+    //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
 function winGame()
 {
     text_UI[text_UI.length-1].innerHTML = "You win!";
     revealMushrooms();
-    setTimeout(function(){ window.location.reload(true); }, 3000);
+    disableMushrooms();
+    //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
 function revealMushrooms()
@@ -327,6 +330,29 @@ function revealMushrooms_full()
     }
 }
 
+/*
+function disableMushrooms()
+{
+    for(let i = 0; i < mainBoard.length; i++)
+    {
+        mainBoard[i] = 0;
+    }
+}
+
+function enableMushrooms()
+{
+    for(let i = 0; i < mainBoard.length; i++)
+    {
+        mainBoard[i] = 0;
+    }
+}
+*/
+
+function resetBoard()
+{
+    mainBoard.splice(0, mainBoard.length);
+}
+
 show_UI();
 
 function restartLevel()
@@ -334,18 +360,22 @@ function restartLevel()
     shuffleArray(mainBoard);
     removeClass();
     setTimeout(() => {  revealMushrooms_full(); }, 20);
-    
+    resetParameters();
+    show_UI();
 }
 
 function randomLevel()
 {
+    resetBoard();
     load_goldenArray(goldenBoard);
     load_mainParameters();
     load_mainArray(mainBoard);
     shuffleArray(mainBoard);
     removeClass();
     setTimeout(() => {  revealMushrooms_full(); }, 20);
+    resetParameters();
     show_UI();
+    console.log(mainBoard);
 }
 
 function removeClass()
@@ -361,6 +391,14 @@ function removeClass()
         grid_element[i].classList.remove("animatePoison_full");
         grid_element[i].classList.remove("animateGolden_full");
     }
+}
+
+function resetParameters()
+{
+    shield_find = 0;
+    golden_find = 0;
+    poison_find = 0;
+    text_UI[text_UI.length-1].innerHTML = "";
 }
 
 revealMushrooms();
