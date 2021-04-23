@@ -1,0 +1,452 @@
+body
+{
+    background-color: darkgreen;
+    background-image: url(img/mushroom_field.png);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#main_container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#main_grid
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.grid_element
+{
+    border: 1px solid black;
+    width: 4em;
+    height: 4em;
+}
+
+@media only screen and (max-width: 576px) 
+{
+    .grid_element
+    {
+        width: 3em;
+        height: 3em;
+    }
+    .text_UI
+    {
+    margin: 0px 5px !important;
+    }
+}
+
+.animateNothing
+{
+    animation-name: animateNothing;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateGolden
+{
+    animation-name: animateGolden;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateShield
+{
+    animation-name: animateShield;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animatePoison
+{
+    animation-name: animatePoison;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateNothing_full
+{
+    animation-play-state: running;
+    animation-name: animateNothing_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateGolden_full
+{
+    animation-play-state: running;
+    animation-name: animateGolden_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateShield_full
+{
+    animation-play-state: running;
+    animation-name: animateShield_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animatePoison_full
+{
+    animation-play-state: running;
+    animation-name: animatePoison_full;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+@keyframes animateNothing {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+}
+
+@keyframes animateGolden {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+}
+
+@keyframes animateShield {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+}
+
+@keyframes animatePoison {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+}
+
+@keyframes animateNothing_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animateGolden_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animateShield_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animatePoison_full {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+.ghost
+{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    display: flex;
+    margin-top: 10%;
+}
+
+#main_UI
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+    /*margin-top: 80px;*/
+}
+
+.text_UI
+{
+    font-size: 40px;
+    margin: 10px 5px;
+    color: floralwhite;
+}
+
+.img_UI
+{
+    width: 50px;
+    height: 50px;
+    margin: 0 5px;
+}
+
+.set_UI
+{
+    display: flex;
+}
+
+.set_UI_buttons
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.side_A
+{
+    flex-direction: row;
+    /*margin-right: 5em;*/
+}
+
+.side_B
+{
+    flex-direction: row-reverse;
+    /*margin-left: 5em;*/
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: lightyellow;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 2px 16px;
+    background-color: goldenrod;
+    color: white;
+    text-align: center;
+  }
+  
+  .modal-body 
+  {
+    padding: 2px 16px;
+    text-align: center;
+  }
+  
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: goldenrod;
+    color: white;
+    text-align: center;
+  }
+
+  .memory_nothing
+  {
+    -webkit-animation-name: memory_nothing;
+    -webkit-animation-duration: 1s;
+    animation-name: memory_nothing;
+    animation-duration: 1s;
+  }
+
+  .memory_shield
+  {
+    -webkit-animation-name: memory_shield;
+    -webkit-animation-duration: 1s;
+    animation-name: memory_shield;
+    animation-duration: 1s
+  }
+
+  .memory_poison
+  {
+    -webkit-animation-name: memory_poison;
+    -webkit-animation-duration: 1s;
+    animation-name: memory_poison;
+    animation-duration: 1s
+  }
+
+  .memory_golden
+  {
+    -webkit-animation-name: memory_golden;
+    -webkit-animation-duration: 10s;
+    animation-name: memory_golden;
+    animation-duration: 10s;
+  }
+
+  @keyframes memory {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+
+@keyframes memory_nothing {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
+
+@keyframes memory_shield {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
+
+@keyframes memory_poison {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
+
+
+@keyframes memory_golden {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+        content:url(img/question.png);
+    }
+    50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+        content:url(img/question.png);
+    }
+}
+
+.commandButton
+{
+    width: 300px;
+    height: 50px;
+    margin: 10px 0px;
+    background-color: forestgreen;
+    font-size: 25px;
+}
