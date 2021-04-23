@@ -12,10 +12,7 @@ let shield_find = 0;
 let golden_find = 0;
 let poison_find = 0;
 
-
-
-let max_turns = 26 - mushroom_golden;
-let turns = mushroom_golden + Math.floor(Math.random() * (max_turns));
+let turns = Math.floor(Math.random() * mushroom_poison + 1);
 
 let grid_element = document.querySelectorAll(".grid_element");
 let ghost = document.querySelectorAll(".ghost");
@@ -57,7 +54,6 @@ function reveal(num)
         {
             grid_element[num].className = "grid_element animateShield";
             f_mushroom_shield();
-            removeTurn();
             break;
         }
         case 3:
@@ -70,7 +66,6 @@ function reveal(num)
         {
             f_mushroom_golden();
             grid_element[num].className = "grid_element animateGolden";
-            removeTurn();
             break;
         }
     }
@@ -242,16 +237,20 @@ function removeTurn()
 
 function loseGame()
 {
+    show_UI();
     text_UI[text_UI.length-1].innerHTML = "You lose!";
-    revealMushrooms();
+    removeClass();
+    setTimeout(() => {  revealMushrooms(); }, 20);
     disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
 function winGame()
 {
+    show_UI();
     text_UI[text_UI.length-1].innerHTML = "You win!";
-    revealMushrooms();
+    removeClass();
+    setTimeout(() => {  revealMushrooms(); }, 20);
     disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
@@ -368,6 +367,12 @@ function randomLevel()
 {
     resetBoard();
     load_goldenArray(goldenBoard);
+    /*
+    mushroom_nothing = 6;
+    mushroom_shield = 6;
+    mushroom_poison = 6;
+    mushroom_golden = 7;
+    */
     load_mainParameters();
     load_mainArray(mainBoard);
     shuffleArray(mainBoard);
@@ -398,6 +403,7 @@ function resetParameters()
     shield_find = 0;
     golden_find = 0;
     poison_find = 0;
+    turns = Math.floor(Math.random() * mushroom_poison + 1);
     text_UI[text_UI.length-1].innerHTML = "";
 }
 
