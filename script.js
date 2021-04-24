@@ -1,3 +1,4 @@
+let realBoard = [];
 let mainBoard = [];
 let goldenBoard = [];
 
@@ -46,7 +47,7 @@ function create_grid_elements()
                     case 2:
                     {
                         grid_element[i].classList.add("animateShield");
-                        revealMushrooms_radar();
+                        revealMushrooms_full();
                         break;
                     }
                     case 3:
@@ -63,14 +64,15 @@ function create_grid_elements()
                     }
                 }
                 canReveal = false;
-                setTimeout(function(){ canReveal = true; }, 1000);
+                mainBoard[i] = 0;
+                setTimeout(function(){ canReveal = true; }, 100);
                 
             }
         });
         
         created_grid_element.addEventListener("animationend", function() 
         {
-            switch(mainBoard[i])
+            switch(realBoard[i])
             {
                 case 1:
                 {
@@ -121,51 +123,6 @@ let nothing_UI = document.querySelector("#nothing_UI");
 
 
 randomLevel();
-/*
-    var btn = document.createElement("BUTTON");
-    btn.innerHTML = "CLICK ME";
-    btn.className = "test test2";
-    document.body.main_grid.appendChild(btn);
-*/
-
-/*
-function reveal(num)
-{
-    switch(mainBoard[num])
-    {
-        case 0:
-        {
-           
-            break;
-        }
-        case 1:
-        {
-            grid_element[num].className = "grid_element animateNothing";
-            f_mushroom_nothing();
-            break;
-        }
-        case 2:
-        {
-            grid_element[num].className = "grid_element animateShield";
-            f_mushroom_shield();
-            break;
-        }
-        case 3:
-        {
-            f_mushroom_poison();
-            grid_element[num].className = "grid_element animatePoison";
-            break;
-        }
-        case 4:
-        {
-            f_mushroom_golden();
-            grid_element[num].className = "grid_element animateGolden";
-            break;
-        }
-    }
-    //mainBoard[num] = 0;
-}
-*/
 
 function load_mainArray(a)
 {
@@ -271,7 +228,7 @@ function f_mushroom_nothing(i)
     //turns++;
     let randMushroom = Math.floor(Math.random() * 4 + 1);
     mainBoard[i] = randMushroom;
-    switch(randMushroom)
+    switch(mainBoard[i])
             {
                 case 1:
                 {
@@ -283,7 +240,7 @@ function f_mushroom_nothing(i)
                 {
                     grid_element[i].classList.add("animateShield");
                     grid_element[i].classList.add("opacityReduced");
-                    revealMushrooms_radar();
+                    revealMushrooms_full();
                     break;
                 }
                 case 3:
@@ -326,8 +283,8 @@ function f_mushroom_poison()
 function show_UI()
 {
     golden_UI.innerHTML = "" + golden_find + "/" + mushroom_golden;
-    poison_UI.innerHTML = "" + mushroom_poison - poison_find + " x";
-    shield_UI.innerHTML = "x " + shield_find + "";
+    /*poison_UI.innerHTML = "" + mushroom_poison - poison_find + " x";
+    shield_UI.innerHTML = "x " + shield_find + "";*/
     nothing_UI.innerHTML = "" + turns + " x";
 }
 
@@ -367,7 +324,7 @@ function revealMushrooms()
 {
     for(let i = 0; i < grid_element.length; i++)
     {
-        switch(mainBoard[i])
+        switch(realBoard[i])
         {
             case 0:
             {
@@ -406,7 +363,7 @@ function revealMushrooms_full()
 {
     for(let i = 0; i < grid_element.length; i++)
     {
-        switch(mainBoard[i])
+        switch(realBoard[i])
         {
             case 0:
             {
@@ -499,7 +456,8 @@ show_UI();
 
 function restartLevel()
 {
-    shuffleArray(mainBoard);
+    shuffleArray(realBoard);
+    mainBoard = [...realBoard];
     revealMushrooms_full();
     removeClass();
     removeClassOpacity();
@@ -518,12 +476,12 @@ function randomLevel()
     mushroom_golden = 7;
     */
     load_mainParameters();
-    load_mainArray(mainBoard);
-    shuffleArray(mainBoard);
+    load_mainArray(realBoard);
+    shuffleArray(realBoard);
+    mainBoard = [...realBoard];
     revealMushrooms_full();
     resetParameters();
     show_UI();
-    console.log(mainBoard);
 }
 
 function removeClass()
@@ -562,6 +520,7 @@ function resetParameters()
     golden_find = 0;
     poison_find = 0;
     turns = randTurns;
+    mainBoard = [...realBoard];
     text_UI[text_UI.length-1].innerHTML = "";
 }
 
