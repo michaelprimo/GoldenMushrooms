@@ -63,7 +63,7 @@ function create_grid_elements()
                     }
                 }
                 canReveal = false;
-                setTimeout(function(){ canReveal = true; }, 1000);
+                setTimeout(function(){ canReveal = true; }, 300);
                 
             }
         });
