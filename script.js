@@ -12,7 +12,8 @@ let shield_find = 0;
 let golden_find = 0;
 let poison_find = 0;
 
-let turns = Math.floor(Math.random() * mushroom_poison + 1);
+let randTurns = Math.floor(Math.random() * 3 + 1);
+let turns = randTurns;
 
 let main_grid = document.querySelector("#main_grid");
 const max_grid_elements = 25;
@@ -34,7 +35,7 @@ function create_grid_elements()
                 {
                     grid_element[i].classList.add("animateNothing");
                     grid_element[i].classList.add("opacityReduced");
-                    f_mushroom_nothing();
+                    f_mushroom_nothing(i);
                     break;
                 }
                 case 2:
@@ -115,6 +116,7 @@ randomLevel();
     document.body.main_grid.appendChild(btn);
 */
 
+/*
 function reveal(num)
 {
     switch(mainBoard[num])
@@ -151,6 +153,7 @@ function reveal(num)
     }
     //mainBoard[num] = 0;
 }
+*/
 
 function load_mainArray(a)
 {
@@ -251,10 +254,41 @@ function f_mushroom_shield()
     show_UI();
 }
 
-function f_mushroom_nothing()
+function f_mushroom_nothing(i)
 {
     //turns++;
-    //let randMushroom 
+    let randMushroom = Math.floor(Math.random() * 4 + 1);
+    switch(randMushroom)
+            {
+                case 1:
+                {
+                    grid_element[i].classList.add("animateNothing");
+                    grid_element[i].classList.add("opacityReduced");
+                    break;
+                }
+                case 2:
+                {
+                    grid_element[i].classList.add("animateShield");
+                    grid_element[i].classList.add("opacityReduced");
+                    revealMushrooms_full();
+                    break;
+                }
+                case 3:
+                {
+                    grid_element[i].classList.add("animatePoison");
+                    grid_element[i].classList.add("opacityReduced");
+                    f_mushroom_poison();
+                    break;
+                }
+                case 4:
+                {
+                    grid_element[i].classList.add("animateGolden");
+                    grid_element[i].classList.add("opacityReduced");
+                    f_mushroom_golden();
+                    break;
+                }
+            } 
+
     show_UI();
 }
 
@@ -271,29 +305,7 @@ function f_mushroom_golden()
 
 function f_mushroom_poison()
 {
-    if(shield_find > 0)
-    {
-        shield_find--;
-    }
-    else if(turns > 0)
-    {
-        if(turns == 1)
-        {
-            turns--;
-        }
-        else
-        {
-            turns = Math.floor(turns/2);
-        }
-        if(turns < 1)
-        {
-            loseGame();
-        }
-    }
-    else
-    {
-        loseGame();
-    }
+    removeTurn();
     poison_find++;
     show_UI();
 }
@@ -493,7 +505,7 @@ function resetParameters()
     shield_find = 0;
     golden_find = 0;
     poison_find = 0;
-    turns = Math.floor(Math.random() * mushroom_poison + 1);
+    turns = randTurns;
     text_UI[text_UI.length-1].innerHTML = "";
 }
 
