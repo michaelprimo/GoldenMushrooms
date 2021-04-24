@@ -113,6 +113,42 @@ body
     transform: perspective(1000px) rotateY(180deg);
 }
 
+.animateNothing_radar
+{
+    animation-play-state: running;
+    animation-name: animateNothing_radar;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateGolden_radar
+{
+    animation-play-state: running;
+    animation-name: animateGolden_radar;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animateShield_radar
+{
+    animation-play-state: running;
+    animation-name: animateShield_radar;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.animatePoison_radar
+{
+    animation-play-state: running;
+    animation-name: animatePoison_radar;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    transform: perspective(1000px) rotateY(180deg);
+}
+
 .opacityReduced
 {
     opacity: 0.6;
@@ -202,6 +238,74 @@ body
         transform: perspective(1000px) rotateY(0deg);
     }
     50% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animateNothing_radar {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    10% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+    90% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_nothing.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animateGolden_radar {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    10% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+    90% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_golden.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animateShield_radar {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    10% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+    90% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_shield.png);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+}
+
+@keyframes animatePoison_radar {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    10% {
+        transform: perspective(1000px) rotateY(180deg);
+        content:url(img/mushroom_poison.png);
+    }
+    90% {
         transform: perspective(1000px) rotateY(180deg);
         content:url(img/mushroom_poison.png);
     }
