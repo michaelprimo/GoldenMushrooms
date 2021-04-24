@@ -33,7 +33,7 @@ function create_grid_elements()
                 case 1:
                 {
                     grid_element[i].classList.add("animateNothing");
-                    
+                    grid_element[i].classList.add("opacityReduced");
                     f_mushroom_nothing();
                     break;
                 }
@@ -253,7 +253,8 @@ function f_mushroom_shield()
 
 function f_mushroom_nothing()
 {
-    turns++;
+    //turns++;
+    //let randMushroom 
     show_UI();
 }
 
@@ -319,9 +320,10 @@ function loseGame()
 {
     show_UI();
     text_UI[text_UI.length-1].innerHTML = "You lose!";
-    revealMushrooms_full();
     removeClass();
-    disableMushrooms();
+    revealMushrooms();
+    
+    //disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -329,9 +331,10 @@ function winGame()
 {
     show_UI();
     text_UI[text_UI.length-1].innerHTML = "You win!";
-    revealMushrooms_full();
     removeClass();
-    disableMushrooms();
+    revealMushrooms();
+    
+    //disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -470,6 +473,7 @@ function removeClass()
         grid_element[i].classList.remove("animateShield");
         grid_element[i].classList.remove("animatePoison");
         grid_element[i].classList.remove("animateGolden");
+        grid_element[i].classList.remove("opacityReduced");
     }
 }
 
