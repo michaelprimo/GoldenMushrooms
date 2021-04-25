@@ -17,6 +17,7 @@ let randTurns = Math.floor(Math.random() * 3 + 1);
 let turns = randTurns;
 
 let canReveal = true;
+let canSelect = true;
 
 let main_grid = document.querySelector("#main_grid");
 const max_grid_elements = 25;
@@ -33,7 +34,7 @@ function create_grid_elements()
         created_grid_element.classList.add("grid_element");
         created_grid_element.addEventListener("click", function() 
         {
-            if(canReveal)
+            if(canReveal && canSelect)
             {
                 grid_element[i].classList.add("selected_element");
                 switch(mainBoard[i])
@@ -280,14 +281,25 @@ function show_UI()
     let life_UI = document.querySelector("#life_UI");
     //nothing_UI.innerHTML = "" + turns + " x";
     life_UI.innerHTML = "";
-    for(let i = 0; i < turns; i++)
+    
+    for(let i = 0; i < randTurns; i++)
     {
-        created_image = document.createElement("img");
-        created_image.classList.add("img_UI");
-        created_image.setAttribute("id", "life");
-        created_image.src = "img/life.png";
-        life_UI.appendChild(created_image);
+        if(i < turns)
+        {
+            created_image = document.createElement("img");
+            created_image.classList.add("img_UI");
+            created_image.src = "img/life.png";
+            life_UI.appendChild(created_image);
+        }
+        else
+        {
+            created_image = document.createElement("img");
+            created_image.classList.add("img_UI");
+            created_image.src = "img/life_empty.png";
+            life_UI.appendChild(created_image);
+        }
     }
+
 }
 
 function removeTurn()
@@ -306,8 +318,7 @@ function loseGame()
     text_UI[text_UI.length-1].innerHTML = "You lose!";
     removeClass();
     revealMushrooms();
-    
-    //disableMushrooms();
+    disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -317,8 +328,7 @@ function winGame()
     text_UI[text_UI.length-1].innerHTML = "You win!";
     removeClass();
     revealMushrooms();
-    
-    //disableMushrooms();
+    disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -431,15 +441,17 @@ function revealMushrooms_radar()
     }
 }
 
-/*
+
 function disableMushrooms()
 {
+    canSelect = false;
     for(let i = 0; i < mainBoard.length; i++)
     {
         mainBoard[i] = 0;
     }
 }
 
+/*
 function enableMushrooms()
 {
     for(let i = 0; i < mainBoard.length; i++)
@@ -522,6 +534,7 @@ function resetParameters()
     shield_find = 0;
     golden_find = 0;
     poison_find = 0;
+    canSelect = true;
     turns = randTurns;
     mainBoard = [...realBoard];
     text_UI[text_UI.length-1].innerHTML = "";

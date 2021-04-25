@@ -326,9 +326,10 @@ body
 #main_UI
 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 1fr;
     grid-gap: 10px;
+    width: 300px;
     /*margin-top: 80px;*/
 }
 
@@ -360,13 +361,13 @@ body
 .side_A
 {
     flex-direction: row;
-    /*margin-right: 5em;*/
+    margin-right: 1em;
 }
 
 .side_B
 {
     flex-direction: row-reverse;
-    /*margin-left: 5em;*/
+    margin-left: 1em;
 }
 
 
