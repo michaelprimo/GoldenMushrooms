@@ -158,11 +158,7 @@ function load_goldenArray(a)
         }
         else
         {
-            curPoints = Math.floor(Math.random() * maxPoints) + 1;
-            if(curPoints < 1)
-            {
-                curPoints = 1;
-            }
+            curPoints = Math.floor(Math.random() * maxPoints);
             a.push(curPoints);
             
             randPoints -= curPoints;
@@ -282,10 +278,19 @@ function f_mushroom_poison()
 
 function show_UI()
 {
+    let created_image; 
     golden_UI.innerHTML = "" + golden_find + "/" + mushroom_golden;
-    /*poison_UI.innerHTML = "" + mushroom_poison - poison_find + " x";
-    shield_UI.innerHTML = "x " + shield_find + "";*/
-    nothing_UI.innerHTML = "" + turns + " x";
+    let life_UI = document.querySelector("#life_UI");
+    //nothing_UI.innerHTML = "" + turns + " x";
+    life_UI.innerHTML = "";
+    for(let i = 0; i < turns; i++)
+    {
+        created_image = document.createElement("img");
+        created_image.classList.add("img_UI");
+        created_image.setAttribute("id", "life");
+        created_image.src = "img/life.png";
+        life_UI.appendChild(created_image);
+    }
 }
 
 function removeTurn()
