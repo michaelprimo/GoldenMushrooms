@@ -326,20 +326,28 @@ body
 #main_UI
 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 1fr;
     grid-gap: 10px;
+    width: 310px;
     /*margin-top: 80px;*/
 }
 
 .text_UI
 {
     font-size: 40px;
-    margin: 10px 5px;
+    margin: 0px 5px;
     color: floralwhite;
 }
 
-.img_UI
+.img_UI_life
+{
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+}
+
+.img_UI_mushroom
 {
     width: 50px;
     height: 50px;
@@ -360,13 +368,13 @@ body
 .side_A
 {
     flex-direction: row;
-    /*margin-right: 5em;*/
+    margin-right: 1em;
 }
 
 .side_B
 {
     flex-direction: row-reverse;
-    /*margin-left: 5em;*/
+    margin-left: 1em;
 }
 
 
@@ -558,4 +566,9 @@ body
     margin: 10px 0px;
     background-color: forestgreen;
     font-size: 25px;
+}
+
+.selected_element
+{
+    border: 1px solid yellow !important;
 }

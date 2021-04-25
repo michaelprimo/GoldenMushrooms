@@ -17,6 +17,7 @@ let randTurns = Math.floor(Math.random() * 3 + 1);
 let turns = randTurns;
 
 let canReveal = true;
+let canSelect = true;
 
 let main_grid = document.querySelector("#main_grid");
 const max_grid_elements = 25;
@@ -33,8 +34,9 @@ function create_grid_elements()
         created_grid_element.classList.add("grid_element");
         created_grid_element.addEventListener("click", function() 
         {
-            if(canReveal)
+            if(canReveal && canSelect)
             {
+                grid_element[i].classList.add("selected_element");
                 switch(mainBoard[i])
                 {
                     case 1:
@@ -149,28 +151,20 @@ function load_goldenArray(a)
     let randPoints = 24;
     let maxPoints = 8;
     let curPoints = 0;
-    for(let i = 0; i < 4; i++)
+    for(let i = 0; i < 3; i++)
     {
-        if(i == 3)
-        {
-            randPoints++;
-            a.push(randPoints);
-        }
-        else
-        {
-            curPoints = Math.floor(Math.random() * maxPoints) + 1;
-            if(curPoints < 1)
-            {
-                curPoints = 1;
-            }
-            a.push(curPoints);
-            
-            randPoints -= curPoints;
-        }
-        console.log("i: " + i + " curPoints: " + curPoints + " randPoints: " + randPoints);
+        curPoints = Math.floor(Math.random() * maxPoints);
+        a.push(curPoints); 
+        randPoints -= curPoints;
         curPoints = 0;
     }    
+    randPoints++;
+    a.push(randPoints);
     shuffleArray(a);
+    while(a[3] == 0)
+    {
+        shuffleArray(a);
+    }
     console.log(randPoints);
 }
 
@@ -282,10 +276,30 @@ function f_mushroom_poison()
 
 function show_UI()
 {
+    let created_image; 
     golden_UI.innerHTML = "" + golden_find + "/" + mushroom_golden;
-    /*poison_UI.innerHTML = "" + mushroom_poison - poison_find + " x";
-    shield_UI.innerHTML = "x " + shield_find + "";*/
-    nothing_UI.innerHTML = "" + turns + " x";
+    let life_UI = document.querySelector("#life_UI");
+    //nothing_UI.innerHTML = "" + turns + " x";
+    life_UI.innerHTML = "";
+    
+    for(let i = 0; i < randTurns; i++)
+    {
+        if(i < turns)
+        {
+            created_image = document.createElement("img");
+            created_image.classList.add("img_UI_life");
+            created_image.src = "img/life.png";
+            life_UI.appendChild(created_image);
+        }
+        else
+        {
+            created_image = document.createElement("img");
+            created_image.classList.add("img_UI_life");
+            created_image.src = "img/life_empty.png";
+            life_UI.appendChild(created_image);
+        }
+    }
+
 }
 
 function removeTurn()
@@ -304,8 +318,7 @@ function loseGame()
     text_UI[text_UI.length-1].innerHTML = "You lose!";
     removeClass();
     revealMushrooms();
-    
-    //disableMushrooms();
+    disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -315,8 +328,7 @@ function winGame()
     text_UI[text_UI.length-1].innerHTML = "You win!";
     removeClass();
     revealMushrooms();
-    
-    //disableMushrooms();
+    disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -429,15 +441,17 @@ function revealMushrooms_radar()
     }
 }
 
-/*
+
 function disableMushrooms()
 {
+    canSelect = false;
     for(let i = 0; i < mainBoard.length; i++)
     {
         mainBoard[i] = 0;
     }
 }
 
+/*
 function enableMushrooms()
 {
     for(let i = 0; i < mainBoard.length; i++)
@@ -500,6 +514,7 @@ function removeClassOpacity()
     for(let i = 0; i < grid_element.length; i++)
     {
         grid_element[i].classList.remove("opacityReduced");
+        grid_element[i].classList.remove("selected_element");
     }
 }
 
@@ -519,6 +534,7 @@ function resetParameters()
     shield_find = 0;
     golden_find = 0;
     poison_find = 0;
+    canSelect = true;
     turns = randTurns;
     mainBoard = [...realBoard];
     text_UI[text_UI.length-1].innerHTML = "";

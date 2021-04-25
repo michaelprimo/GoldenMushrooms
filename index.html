@@ -28,7 +28,7 @@
     <div id="main_container">
         <div id="main_UI">
             <div  class="set_UI side_A">
-                <img class="img_UI" src="img/mushroom_golden.png" alt="Golden">
+                <img class="img_UI_mushroom" src="img/mushroom_golden.png" alt="Golden">
                 <p id="golden_UI" class="text_UI">x 0</p>
             </div>
             <!--
@@ -55,7 +55,7 @@
 
         <div class="set_UI_buttons">
             <button class="commandButton" onclick="restartLevel();">Restart!</button>
-            <button class="commandButton" onclick="window.location.reload();">Random Level</button>
+            <button class="commandButton" onclick="modal[0].style.display = 'block';">Select Level</button>
         </div>
 
     </div>
@@ -67,15 +67,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <span class="close">×</span>
-        <h2>Modal Header</h2>
+        <h2>Welcome to Golden Mushrooms!</h2>
       </div>
       <div class="modal-body">
-        <p>Some text in the Modal Body</p>
-        <p>Some other text...</p>
-        <input type="number">
+        <p>Do you want to solve a level or generate a random one?</p>
+        <input id="selected_level" type="number" min="1" max="10">
+        <br>
+        <button class="commandButton" onclick="generateLevel();">Go with the level!</button>
+        <br>
+        <button class="commandButton" onclick="randomLevel();">Generate a random one</button>
       </div>
       <div class="modal-footer">
-        <h3>Modal Footer</h3>
+        <h3>Get all the Golden Mushrooms and avoid the red ones!</h3>
       </div>
     </div>
   
@@ -96,7 +99,7 @@
         <input type="number">
       </div>
       <div class="modal-footer">
-        <h3>Modal Footer</h3>
+        <h3>Get all the Golden Mushrooms and avoid the red ones!</h3>
       </div>
     </div>
   
