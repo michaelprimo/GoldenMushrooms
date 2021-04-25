@@ -592,6 +592,7 @@ function generateLevel()
     goldenBoard.push(levels[selected_level-1][3]); 
     load_mainParameters();
     load_mainArray(realBoard);
+    shuffleArray(realBoard);
     mainBoard = [...realBoard];
     revealMushrooms_full(false);
     resetParameters();
