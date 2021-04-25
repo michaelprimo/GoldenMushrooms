@@ -1,3 +1,4 @@
+let realBoard = [];
 let mainBoard = [];
 let goldenBoard = [];
 
@@ -12,7 +13,10 @@ let shield_find = 0;
 let golden_find = 0;
 let poison_find = 0;
 
-let turns = Math.floor(Math.random() * mushroom_poison + 1);
+let randTurns = Math.floor(Math.random() * 3 + 1);
+let turns = randTurns;
+
+let canReveal = true;
 
 let main_grid = document.querySelector("#main_grid");
 const max_grid_elements = 25;
@@ -20,6 +24,7 @@ create_grid_elements();
 
 function create_grid_elements()
 {
+   
     let created_grid_element; 
     let created_image; 
     for(let i = 0; i < max_grid_elements; i++)
@@ -28,59 +33,69 @@ function create_grid_elements()
         created_grid_element.classList.add("grid_element");
         created_grid_element.addEventListener("click", function() 
         {
-            switch(mainBoard[i])
+            if(canReveal)
             {
-                case 1:
+                switch(mainBoard[i])
                 {
-                    grid_element[i].classList.add("animateNothing");
-                    
-                    f_mushroom_nothing();
-                    break;
+                    case 1:
+                    {
+                        grid_element[i].classList.add("animateNothing");
+                        grid_element[i].classList.add("opacityReduced");
+                        f_mushroom_nothing(i);
+                        break;
+                    }
+                    case 2:
+                    {
+                        grid_element[i].classList.add("animateShield");
+                        revealMushrooms_full();
+                        break;
+                    }
+                    case 3:
+                    {
+                        f_mushroom_poison();
+                        grid_element[i].classList.add("animatePoison");
+                        break;
+                    }
+                    case 4:
+                    {
+                        f_mushroom_golden();
+                        grid_element[i].classList.add("animateGolden");
+                        break;
+                    }
                 }
-                case 2:
-                {
-                    grid_element[i].classList.add("animateShield");
-                    revealMushrooms_full();
-                    break;
-                }
-                case 3:
-                {
-                    f_mushroom_poison();
-                    grid_element[i].classList.add("animatePoison");
-                    break;
-                }
-                case 4:
-                {
-                    f_mushroom_golden();
-                    grid_element[i].classList.add("animateGolden");
-                    break;
-                }
+                canReveal = false;
+                mainBoard[i] = 0;
+                setTimeout(function(){ canReveal = true; }, 100);
+                
             }
         });
         
         created_grid_element.addEventListener("animationend", function() 
         {
-            switch(mainBoard[i])
+            switch(realBoard[i])
             {
                 case 1:
                 {
                     grid_element[i].classList.remove("animateNothing_full");
-                    
+                    grid_element[i].classList.remove("animateNothing_radar");
                     break;
                 }
                 case 2:
                 {
                     grid_element[i].classList.remove("animateShield_full");
+                    grid_element[i].classList.remove("animateShield_radar");
                     break;
                 }
                 case 3:
                 {
                     grid_element[i].classList.remove("animatePoison_full");
+                    grid_element[i].classList.remove("animatePoison_radar");
                     break;
                 }
                 case 4:
                 {
                     grid_element[i].classList.remove("animateGolden_full");
+                    grid_element[i].classList.remove("animateGolden_radar");
                     break;
                 }
             }
@@ -108,49 +123,6 @@ let nothing_UI = document.querySelector("#nothing_UI");
 
 
 randomLevel();
-/*
-    var btn = document.createElement("BUTTON");
-    btn.innerHTML = "CLICK ME";
-    btn.className = "test test2";
-    document.body.main_grid.appendChild(btn);
-*/
-
-function reveal(num)
-{
-    switch(mainBoard[num])
-    {
-        case 0:
-        {
-           
-            break;
-        }
-        case 1:
-        {
-            grid_element[num].className = "grid_element animateNothing";
-            f_mushroom_nothing();
-            break;
-        }
-        case 2:
-        {
-            grid_element[num].className = "grid_element animateShield";
-            f_mushroom_shield();
-            break;
-        }
-        case 3:
-        {
-            f_mushroom_poison();
-            grid_element[num].className = "grid_element animatePoison";
-            break;
-        }
-        case 4:
-        {
-            f_mushroom_golden();
-            grid_element[num].className = "grid_element animateGolden";
-            break;
-        }
-    }
-    //mainBoard[num] = 0;
-}
 
 function load_mainArray(a)
 {
@@ -251,9 +223,42 @@ function f_mushroom_shield()
     show_UI();
 }
 
-function f_mushroom_nothing()
+function f_mushroom_nothing(i)
 {
-    turns++;
+    //turns++;
+    let randMushroom = Math.floor(Math.random() * 4 + 1);
+    mainBoard[i] = randMushroom;
+    switch(mainBoard[i])
+            {
+                case 1:
+                {
+                    grid_element[i].classList.add("animateNothing");
+                    grid_element[i].classList.add("opacityReduced");
+                    break;
+                }
+                case 2:
+                {
+                    grid_element[i].classList.add("animateShield");
+                    grid_element[i].classList.add("opacityReduced");
+                    revealMushrooms_full();
+                    break;
+                }
+                case 3:
+                {
+                    grid_element[i].classList.add("animatePoison");
+                    grid_element[i].classList.add("opacityReduced");
+                    f_mushroom_poison();
+                    break;
+                }
+                case 4:
+                {
+                    grid_element[i].classList.add("animateGolden");
+                    grid_element[i].classList.add("opacityReduced");
+                    f_mushroom_golden();
+                    break;
+                }
+            } 
+
     show_UI();
 }
 
@@ -270,29 +275,7 @@ function f_mushroom_golden()
 
 function f_mushroom_poison()
 {
-    if(shield_find > 0)
-    {
-        shield_find--;
-    }
-    else if(turns > 0)
-    {
-        if(turns == 1)
-        {
-            turns--;
-        }
-        else
-        {
-            turns = Math.floor(turns/2);
-        }
-        if(turns < 1)
-        {
-            loseGame();
-        }
-    }
-    else
-    {
-        loseGame();
-    }
+    removeTurn();
     poison_find++;
     show_UI();
 }
@@ -300,8 +283,8 @@ function f_mushroom_poison()
 function show_UI()
 {
     golden_UI.innerHTML = "" + golden_find + "/" + mushroom_golden;
-    poison_UI.innerHTML = "" + mushroom_poison - poison_find + " x";
-    shield_UI.innerHTML = "x " + shield_find + "";
+    /*poison_UI.innerHTML = "" + mushroom_poison - poison_find + " x";
+    shield_UI.innerHTML = "x " + shield_find + "";*/
     nothing_UI.innerHTML = "" + turns + " x";
 }
 
@@ -319,9 +302,10 @@ function loseGame()
 {
     show_UI();
     text_UI[text_UI.length-1].innerHTML = "You lose!";
-    revealMushrooms_full();
     removeClass();
-    disableMushrooms();
+    revealMushrooms();
+    
+    //disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -329,9 +313,10 @@ function winGame()
 {
     show_UI();
     text_UI[text_UI.length-1].innerHTML = "You win!";
-    revealMushrooms_full();
     removeClass();
-    disableMushrooms();
+    revealMushrooms();
+    
+    //disableMushrooms();
     //setTimeout(function(){ window.location.reload(true); }, 3000);
 }
 
@@ -339,7 +324,7 @@ function revealMushrooms()
 {
     for(let i = 0; i < grid_element.length; i++)
     {
-        switch(mainBoard[i])
+        switch(realBoard[i])
         {
             case 0:
             {
@@ -378,7 +363,7 @@ function revealMushrooms_full()
 {
     for(let i = 0; i < grid_element.length; i++)
     {
-        switch(mainBoard[i])
+        switch(realBoard[i])
         {
             case 0:
             {
@@ -403,6 +388,41 @@ function revealMushrooms_full()
             case 4:
             {
                 grid_element[i].classList.add("animateGolden_full");
+                break;
+            }
+        } 
+    }
+}
+
+function revealMushrooms_radar()
+{
+    for(let i = 0; i < grid_element.length; i++)
+    {
+        switch(mainBoard[i])
+        {
+            case 0:
+            {
+               
+                break;
+            }
+            case 1:
+            {
+                grid_element[i].classList.add("animateNothing_radar");
+                break;
+            }
+            case 2:
+            {
+                grid_element[i].classList.add("animateShield_radar");
+                break;
+            }
+            case 3:
+            {
+                grid_element[i].classList.add("animatePoison_radar");
+                break;
+            }
+            case 4:
+            {
+                grid_element[i].classList.add("animateGolden_radar");
                 break;
             }
         } 
@@ -436,9 +456,11 @@ show_UI();
 
 function restartLevel()
 {
-    shuffleArray(mainBoard);
+    shuffleArray(realBoard);
+    mainBoard = [...realBoard];
     revealMushrooms_full();
     removeClass();
+    removeClassOpacity();
     resetParameters();
     show_UI();
 }
@@ -454,12 +476,12 @@ function randomLevel()
     mushroom_golden = 7;
     */
     load_mainParameters();
-    load_mainArray(mainBoard);
-    shuffleArray(mainBoard);
+    load_mainArray(realBoard);
+    shuffleArray(realBoard);
+    mainBoard = [...realBoard];
     revealMushrooms_full();
     resetParameters();
     show_UI();
-    console.log(mainBoard);
 }
 
 function removeClass()
@@ -470,6 +492,14 @@ function removeClass()
         grid_element[i].classList.remove("animateShield");
         grid_element[i].classList.remove("animatePoison");
         grid_element[i].classList.remove("animateGolden");
+    }
+}
+
+function removeClassOpacity()
+{
+    for(let i = 0; i < grid_element.length; i++)
+    {
+        grid_element[i].classList.remove("opacityReduced");
     }
 }
 
@@ -489,7 +519,8 @@ function resetParameters()
     shield_find = 0;
     golden_find = 0;
     poison_find = 0;
-    turns = Math.floor(Math.random() * mushroom_poison + 1);
+    turns = randTurns;
+    mainBoard = [...realBoard];
     text_UI[text_UI.length-1].innerHTML = "";
 }
 
