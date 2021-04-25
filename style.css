@@ -559,3 +559,8 @@ body
     background-color: forestgreen;
     font-size: 25px;
 }
+
+.selected_element
+{
+    border: 1px solid yellow !important;
+}

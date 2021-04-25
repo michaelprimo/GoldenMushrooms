@@ -35,6 +35,7 @@ function create_grid_elements()
         {
             if(canReveal)
             {
+                grid_element[i].classList.add("selected_element");
                 switch(mainBoard[i])
                 {
                     case 1:
@@ -149,24 +150,20 @@ function load_goldenArray(a)
     let randPoints = 24;
     let maxPoints = 8;
     let curPoints = 0;
-    for(let i = 0; i < 4; i++)
+    for(let i = 0; i < 3; i++)
     {
-        if(i == 3)
-        {
-            randPoints++;
-            a.push(randPoints);
-        }
-        else
-        {
-            curPoints = Math.floor(Math.random() * maxPoints);
-            a.push(curPoints);
-            
-            randPoints -= curPoints;
-        }
-        console.log("i: " + i + " curPoints: " + curPoints + " randPoints: " + randPoints);
+        curPoints = Math.floor(Math.random() * maxPoints);
+        a.push(curPoints); 
+        randPoints -= curPoints;
         curPoints = 0;
     }    
+    randPoints++;
+    a.push(randPoints);
     shuffleArray(a);
+    while(a[3] == 0)
+    {
+        shuffleArray(a);
+    }
     console.log(randPoints);
 }
 
@@ -505,6 +502,7 @@ function removeClassOpacity()
     for(let i = 0; i < grid_element.length; i++)
     {
         grid_element[i].classList.remove("opacityReduced");
+        grid_element[i].classList.remove("selected_element");
     }
 }
 
