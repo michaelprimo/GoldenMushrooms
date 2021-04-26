@@ -394,6 +394,11 @@ body
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
+
+#myModal3
+{
+    padding-top: 0px !important;
+}
   
   /* Modal Content */
   .modal-content {
@@ -579,4 +584,9 @@ body
 .selected_element
 {
     border: 1px solid yellow !important;
+}
+
+.no_margin
+{
+    margin: 0;
 }

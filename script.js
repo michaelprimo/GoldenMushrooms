@@ -94,7 +94,7 @@ window.onclick = function(event) {
 
 window.onload = function(event) 
 {
-  modal[0].style.display = "block";
+  modal[1].style.display = "block";
 }
 
 
@@ -330,8 +330,6 @@ function f_mushroom_nothing(i)
                     break;
                 }
             } 
-            console.log("sending show_UI");
-    show_UI(false, "");
 }
 
 function f_mushroom_golden()
@@ -434,6 +432,13 @@ function loseGame()
 
 function winGame()
 {
+    /*
+    if(story_level == true)
+    {
+        let skipLevel = document.querySelector("#skipLevel");
+        skipLevel.innerHTML = 
+    }
+    */
     console.log("sending show_UI");
     show_UI(true, "You win!");
     revealMushrooms();
@@ -669,10 +674,47 @@ function generateLevel()
     resetParameters();
     randTurns = levels[selected_level-1][4];
     turns = randTurns;
-    curLevel = level_reached;
+    curLevel = selected_level;
     console.log("sending show_UI");
     show_UI(false, "");
     modal[0].style.display = "none";
+}
+
+function editedLevel()
+{
+    let selected_golden = document.querySelector("#selected_golden").value;
+    let selected_poison = document.querySelector("#selected_poison").value;
+    let selected_shield = document.querySelector("#selected_shield").value;
+    let selected_nothing = document.querySelector("#selected_nothing").value;
+    let sum_mushrooms = parseFloat(selected_golden) + parseFloat(selected_poison) + parseFloat(selected_shield) + parseFloat(selected_nothing);
+    let selected_lives = document.querySelector("#selected_lives").value;
+    if( sum_mushrooms != "25")
+    {
+        alert("Mushrooms used for the level: " + sum_mushrooms + "/25. The sum of the mushrooms must be 25!");
+    }
+    else
+    {
+        story_level = false; 
+        resetBoard();
+        removeClass();
+        removeClassOpacity();
+        goldenBoard.push(selected_nothing);
+        goldenBoard.push(selected_shield); 
+        goldenBoard.push(selected_poison); 
+        goldenBoard.push(selected_golden);
+        load_mainParameters();
+        load_mainArray(realBoard);
+        shuffleArray(realBoard);
+        mainBoard = [...realBoard];
+        revealMushrooms_full(false);
+        resetParameters();
+        randTurns = selected_lives;
+        turns = randTurns;
+        curLevel = selected_level;
+        console.log("sending show_UI");
+        show_UI(true, "You win!");
+        modal[2].style.display = "none";
+    }
 }
 
 function removeClass()
@@ -755,4 +797,21 @@ function resetLevel()
 
 revealMushrooms_full();
 
+function createLevel()
+{
+    modal[1].style.display = "none";
+    modal[2].style.display = "block";
+}
 
+function playLevel()
+{
+    modal[1].style.display = "none";
+    modal[0].style.display = "block";
+}
+
+function menuLevel()
+{
+    modal[0].style.display = "none";
+    modal[2].style.display = "none";
+    modal[1].style.display = "block";
+}

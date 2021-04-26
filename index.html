@@ -56,8 +56,8 @@
         </div>
 
         <div class="set_UI_buttons">
-            <button class="commandButton" onclick="restartLevel();">Restart!</button>
-            <button class="commandButton" onclick="modal[0].style.display = 'block';">Select Level</button>
+            <button id="skipLevel" class="commandButton" onclick="restartLevel();">Restart!</button>
+            <button class="commandButton" onclick="modal[1].style.display = 'block';">Select Level</button>
         </div>
 
     </div>
@@ -65,51 +65,89 @@
 <!-- The Modal -->
 <div id="myModal" class="modal">
     
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="close">×</span>
-        <h2>Welcome to Golden Mushrooms!</h2>
-      </div>
-      <div class="modal-body">
-        <p>Do you want to solve a level or generate a random one?</p>
-        <input id="selected_level" type="number" min="1" max="10">
-        <br>
-        <button class = "commandButton commandButton_mini" onclick="generateLevel();">Go!</button>
-        <br>
-        <button class = "commandButton commandButton_mini" onclick="randomLevel();">Random Level</button>
-        <br>
-        <button class = "commandButton commandButton_mini" onclick="resetLevel();">Reset Progress</button>
-      </div>
-      <div class="modal-footer">
-        <h3>Get all the Golden Mushrooms and avoid the red ones!</h3>
-      </div>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Play a Level</h2>
     </div>
-  
+    <div class="modal-body">
+      <p>Select the level you want to solve.</p>
+      <input id="selected_level" type="number" min="1" max="10">
+      <br>
+      <button class = "commandButton commandButton_mini" onclick="generateLevel();">Go!</button>
+      <br>
+      <button class = "commandButton commandButton_mini" onclick="menuLevel();">Return Back</button>
+    </div>
+    <div class="modal-footer">
+      <h3>There are 30 levels: try to beat them all!</h3>
+    </div>
   </div>
 
-  <!-- The Modal -->
-<div id="myModal2" class="modal">
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
     
-    <!-- Modal content -->
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="close">×</span>
-        <h2>Modal Header2</h2>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the Modal Body2</p>
-        <p>Some other text...2</p>
-        <input type="number">
-      </div>
-      <div class="modal-footer">
-        <h3>Get all the Golden Mushrooms and avoid the red ones!</h3>
-      </div>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Welcome to Golden Mushrooms!</h2>
     </div>
-  
+    <div class="modal-body">
+      <p>Do you want to create or play a level?</p>
+      <button class = "commandButton commandButton_mini" onclick="createLevel();">Create Level</button>
+      <br>
+      <button class = "commandButton commandButton_mini" onclick="playLevel();">Play Level</button>
+      <br>
+      <button class = "commandButton commandButton_mini" onclick="randomLevel();">Random Level</button>
+    </div>
+    <div class="modal-footer">
+      <h3>Get all the Golden Mushrooms and avoid the red ones!</h3>
+    </div>
   </div>
 
-  
+</div>
+
+<!-- The Modal -->
+<div id="myModal3" class="modal">
+    
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Create a Level</h2>
+    </div>
+    <div class="modal-body">
+      <p>Select the mushrooms you want for the level.</p>
+      <label for="selected_golden"><img class="img_UI_life" src="img/mushroom_golden.png" alt="golden">Mushroom Golden</label>
+      <input id="selected_golden" type="number" min="0" max="25" value="7">
+      <p class="no_margin">Collect them all to win!</p>
+      <label for="selected_poison"><img class="img_UI_life" src="img/mushroom_poison.png" alt="golden">Mushroom Poison</label>
+      <input id="selected_poison" type="number" min="0" max="25" value="6">
+      <p class="no_margin">You will lose a life if you find this!</p>
+      <label for="selected_shield"><img class="img_UI_life" src="img/mushroom_shield.png" alt="golden">Mushroom Radar</label>
+      <input id="selected_shield" type="number" min="0" max="25" value="6">
+      <p class="no_margin">See the rest of the hiding mushrooms for one second!</p>
+      <label for="selected_nothing"><img class="img_UI_life" src="img/mushroom_nothing.png" alt="golden">Mushroom Imposter</label>
+      <input id="selected_nothing" type="number" min="0" max="25" value="6">
+      <p class="no_margin">It can do nothing or be a random mushroom in disguise.</p>
+      <label for="selected_lives"><img class="img_UI_life" src="img/life.png" alt="lives">Lives</label>
+      <input id="selected_lives" type="number" min="1" max="3" value="1">
+      <p class="no_margin">The amount of times you can defend against the red (poisoned) mushrooms.</p>
+      <br>
+      <button class = "commandButton commandButton_mini" onclick="editedLevel();">Go!</button>
+      <br>
+      <button class = "commandButton commandButton_mini" onclick="menuLevel();">Return Back</button>
+    </div>
+    <div class="modal-footer">
+      <h3>You can only select 25 mushrooms for the created level!</h3>
+    </div>
+  </div>
+
+</div>
+
     <script src="script.js"></script>
     
 </body>
