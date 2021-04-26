@@ -204,8 +204,6 @@ let poison_UI = document.querySelector("#poison_UI");
 let shield_UI = document.querySelector("#shield_UI");
 let nothing_UI = document.querySelector("#nothing_UI");
 
-randomLevel();
-
 function load_mainArray(a)
 {
     for(let i = 0; i < mushroom_nothing; i++)
@@ -293,7 +291,8 @@ function load_mainParameters()
 function f_mushroom_shield()
 {
     shield_find++;
-    show_UI();
+    console.log("sending show_UI");
+    show_UI(false, "");
 }
 
 function f_mushroom_nothing(i)
@@ -331,8 +330,8 @@ function f_mushroom_nothing(i)
                     break;
                 }
             } 
-
-    show_UI();
+            console.log("sending show_UI");
+    show_UI(false, "");
 }
 
 function f_mushroom_golden()
@@ -343,18 +342,37 @@ function f_mushroom_golden()
     {
         winGame();
     }
-    show_UI();
+    console.log("sending show_UI");
+    if(golden_find == mushroom_golden)
+    {
+        show_UI(true, "You win!");
+    }
+    else
+    {
+        show_UI(false, "");
+    }
+    
 }
 
 function f_mushroom_poison()
 {
     removeTurn();
     poison_find++;
-    show_UI();
+    console.log("sending show_UI");
+    if(turns <= 0)
+    {
+        show_UI(true, "You lose!");
+    }
+    else
+    {
+        show_UI(false, "");
+    }
+    
 }
 
-function show_UI()
+function show_UI(gameResult, gameResult_message)
 {
+    console.log("gameResult: " + gameResult + " gameResult_message:" + gameResult_message );
     let created_image; 
     golden_UI.innerHTML = "" + golden_find + "/" + mushroom_golden;
     let life_UI = document.querySelector("#life_UI");
@@ -378,16 +396,20 @@ function show_UI()
             life_UI.appendChild(created_image);
         }
     }
-/*
-    if(story_level == true)
+    
+    if(gameResult == true)
     {
-        text_UI[text_UI.length-1].innerHTML = "Level " + selected_level.value;
+        text_UI[text_UI.length-1].innerHTML = gameResult_message;
+    }
+    else if(story_level == true)
+    {
+        text_UI[text_UI.length-1].innerHTML = "Level " + curLevel;
     }
     else
     {
         text_UI[text_UI.length-1].innerHTML = "Random Level";
     }
-*/
+
 }
 
 function removeTurn()
@@ -397,13 +419,14 @@ function removeTurn()
     {
         loseGame();
     }
-    show_UI();
+    console.log("sending show_UI");
+    show_UI(false, "");
 }
 
 function loseGame()
 {
-    show_UI();
-    text_UI[text_UI.length-1].innerHTML = "You lose!";
+    console.log("sending show_UI");
+    show_UI(true, "You lose!");
     revealMushrooms();
     disableMushrooms();
     check_level();
@@ -411,8 +434,8 @@ function loseGame()
 
 function winGame()
 {
-    show_UI();
-    text_UI[text_UI.length-1].innerHTML = "You win!";
+    console.log("sending show_UI");
+    show_UI(true, "You win!");
     revealMushrooms();
     disableMushrooms();
     check_level();
@@ -594,8 +617,8 @@ function resetBoard()
     realBoard.splice(0, realBoard.length);
     goldenBoard.splice(0, goldenBoard.length);
 }
-
-show_UI();
+console.log("sending show_UI");
+show_UI(false, "");
 
 function restartLevel()
 {
@@ -605,7 +628,8 @@ function restartLevel()
     removeClass();
     removeClassOpacity();
     resetParameters();
-    show_UI();
+    console.log("sending show_UI");
+    show_UI(false, "");
 }
 
 function randomLevel()
@@ -621,7 +645,8 @@ function randomLevel()
     mainBoard = [...realBoard];
     revealMushrooms_full(false);
     resetParameters();
-    show_UI();
+    console.log("sending show_UI");
+    show_UI(false, "");
     modal[0].style.display = "none";
 }
 
@@ -644,8 +669,9 @@ function generateLevel()
     resetParameters();
     randTurns = levels[selected_level-1][4];
     turns = randTurns;
-    show_UI();
     curLevel = level_reached;
+    console.log("sending show_UI");
+    show_UI(false, "");
     modal[0].style.display = "none";
 }
 
