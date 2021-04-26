@@ -40,16 +40,17 @@ let levels = [
     [6,3,7,9,1]
 ];
 
-let curLevels;
+let level_reached;
+let curLevel;
 let story_level;
 
-if(localStorage.getItem("curLevels") != null)
+if(localStorage.getItem("level_reached") != null)
 {
-    curLevels = localStorage.getItem("curLevels");
+    level_reached = localStorage.getItem("level_reached");
 }
 else
 {
-    curLevels = 1;
+    level_reached = 1;
 }
 
 setMaxLevel();
@@ -644,6 +645,7 @@ function generateLevel()
     randTurns = levels[selected_level-1][4];
     turns = randTurns;
     show_UI();
+    curLevel = level_reached;
     modal[0].style.display = "none";
 }
 
@@ -692,30 +694,37 @@ function resetParameters()
 function setMaxLevel()
 {
     let selected_level = document.getElementById("selected_level");
-    let selected_max_level = curLevels.toString();
-    selected_level.setAttribute("max",curLevels);
+    let selected_max_level = level_reached.toString();
+    selected_level.setAttribute("max",level_reached);
     selected_level.value = selected_max_level;
 }
 
 function save_progress()
 {
-    localStorage.setItem("curLevels", curLevels);
+    localStorage.setItem("level_reached", level_reached);
 }
 
 function levelSolved()
 {
-    curLevels++;
+    level_reached++;
     save_progress();
 }
 
 function check_level()
 {
     let selected_level = document.getElementById("selected_level").value;
-    if(story_level == true && selected_level == curLevels && curLevels < levels.length)
+    if(story_level == true && selected_level == curLevel && level_reached < levels.length)
     {
         levelSolved();
         setMaxLevel();
     }
+}
+
+function resetLevel()
+{
+    level_reached = 1;
+    localStorage.setItem("level_reached", level_reached);
+    setMaxLevel();
 }
 
 revealMushrooms_full();
