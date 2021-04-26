@@ -13,12 +13,46 @@ let levels = [
     [0,15,3,7,3],
     [16,5,0,4,3],
     [10,5,5,5,2],
+    [2,8,12,3,2],
+    [15,8,1,1,3],
+    [1,10,9,5,1],
+    [0,1,4,20,1],
+    [10,0,12,3,3],
+    [14,1,0,10,1],
+    [1,1,20,3,3],
+    [5,8,9,3,2],
+    [11,8,3,3,2],
+    [10,0,10,5,1],
+    [4,4,12,5,2],
+    [2,3,10,10,3],
+    [1,4,13,7,3],
+    [20,0,0,5,1],
+    [2,2,5,16,2],
+    [8,2,9,6,1],
+    [13,8,0,5,2],
+    [1,5,15,4,1],
+    [0,12,8,5,2],
     [6,7,6,6,2],
     [7,6,6,6,2],
     [6,6,7,6,2],
     [6,6,6,7,2],
+    [6,6,6,7,2],
     [6,3,7,9,1]
 ];
+
+let curLevels;
+let story_level;
+
+if(localStorage.getItem("curLevels") != null)
+{
+    curLevels = localStorage.getItem("curLevels");
+}
+else
+{
+    curLevels = 1;
+}
+
+setMaxLevel();
 
 let points = 0;
 
@@ -343,7 +377,16 @@ function show_UI()
             life_UI.appendChild(created_image);
         }
     }
-
+/*
+    if(story_level == true)
+    {
+        text_UI[text_UI.length-1].innerHTML = "Level " + selected_level.value;
+    }
+    else
+    {
+        text_UI[text_UI.length-1].innerHTML = "Random Level";
+    }
+*/
 }
 
 function removeTurn()
@@ -362,7 +405,7 @@ function loseGame()
     text_UI[text_UI.length-1].innerHTML = "You lose!";
     revealMushrooms();
     disableMushrooms();
-    //setTimeout(function(){ window.location.reload(true); }, 3000);
+    check_level();
 }
 
 function winGame()
@@ -371,7 +414,7 @@ function winGame()
     text_UI[text_UI.length-1].innerHTML = "You win!";
     revealMushrooms();
     disableMushrooms();
-    //setTimeout(function(){ window.location.reload(true); }, 3000);
+    check_level();
 }
 
 function revealMushrooms()
@@ -566,6 +609,7 @@ function restartLevel()
 
 function randomLevel()
 {
+    story_level = false; 
     resetBoard();
     removeClass();
     removeClassOpacity();
@@ -582,6 +626,7 @@ function randomLevel()
 
 function generateLevel()
 {
+    story_level = true; 
     resetBoard();
     removeClass();
     removeClassOpacity();
@@ -642,6 +687,35 @@ function resetParameters()
     turns = randTurns;
     mainBoard = [...realBoard];
     text_UI[text_UI.length-1].innerHTML = "";
+}
+
+function setMaxLevel()
+{
+    let selected_level = document.getElementById("selected_level");
+    let selected_max_level = curLevels.toString();
+    selected_level.setAttribute("max",curLevels);
+    selected_level.value = selected_max_level;
+}
+
+function save_progress()
+{
+    localStorage.setItem("curLevels", curLevels);
+}
+
+function levelSolved()
+{
+    curLevels++;
+    save_progress();
+}
+
+function check_level()
+{
+    let selected_level = document.getElementById("selected_level").value;
+    if(story_level == true && selected_level == curLevels && curLevels < levels.length)
+    {
+        levelSolved();
+        setMaxLevel();
+    }
 }
 
 revealMushrooms_full();

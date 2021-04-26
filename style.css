@@ -568,6 +568,12 @@ body
     font-size: 25px;
 }
 
+.commandButton_mini
+{
+    width: 150px !important;
+    font-size: 20px !important;
+}
+
 .selected_element
 {
     border: 1px solid yellow !important;
