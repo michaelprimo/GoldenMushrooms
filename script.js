@@ -652,7 +652,7 @@ function randomLevel()
     resetParameters();
     console.log("sending show_UI");
     show_UI(false, "");
-    modal[0].style.display = "none";
+    modal[1].style.display = "none";
 }
 
 function generateLevel()
