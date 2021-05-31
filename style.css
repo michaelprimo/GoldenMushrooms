@@ -4,7 +4,10 @@ body
     background-image: url(img/mushroom_field.png);
     background-repeat: repeat;
     font-family: "josefin";
+<<<<<<< HEAD
     overflow: hidden;
+=======
+>>>>>>> e223adcb3c7270dd5366bffbb90d254807b579df
 }
 
 @font-face {

@@ -2,10 +2,58 @@ let realBoard = [];
 let mainBoard = [];
 let goldenBoard = [];
 
-let mushroom_nothing = 6;
-let mushroom_shield = 6;
-let mushroom_poison = 6;
-let mushroom_golden = 7;
+let mushroom_nothing;
+let mushroom_shield;
+let mushroom_poison;
+let mushroom_golden;
+
+let levels = [
+    [0,0,0,25,3],
+    [0,0,24,1,3],
+    [0,15,3,7,3],
+    [16,5,0,4,3],
+    [10,5,5,5,2],
+    [2,8,12,3,2],
+    [15,8,1,1,3],
+    [1,10,9,5,1],
+    [0,1,4,20,1],
+    [10,0,12,3,3],
+    [14,1,0,10,1],
+    [1,1,20,3,3],
+    [5,8,9,3,2],
+    [11,8,3,3,2],
+    [10,0,10,5,1],
+    [4,4,12,5,2],
+    [2,3,10,10,3],
+    [1,4,13,7,3],
+    [20,0,0,5,1],
+    [2,2,5,16,2],
+    [8,2,9,6,1],
+    [13,8,0,5,2],
+    [1,5,15,4,1],
+    [0,12,8,5,2],
+    [6,7,6,6,2],
+    [7,6,6,6,2],
+    [6,6,7,6,2],
+    [6,6,6,7,2],
+    [6,6,6,7,2],
+    [6,3,7,9,1]
+];
+
+let level_reached;
+let curLevel;
+let story_level;
+
+if(localStorage.getItem("level_reached") != null)
+{
+    level_reached = localStorage.getItem("level_reached");
+}
+else
+{
+    level_reached = 1;
+}
+
+setMaxLevel();
 
 let points = 0;
 
@@ -21,6 +69,39 @@ let canSelect = true;
 
 let main_grid = document.querySelector("#main_grid");
 const max_grid_elements = 25;
+
+
+
+
+// Get the modal
+var modal = document.getElementsByClassName('modal');
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close");
+
+// When the user clicks on <span> (x), close the modal
+span[0].onclick = function() {
+    modal[0].style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+window.onload = function(event) 
+{
+  modal[0].style.display = "block";
+}
+
+
+
+
+
+
 create_grid_elements();
 
 function create_grid_elements()
@@ -49,7 +130,7 @@ function create_grid_elements()
                     case 2:
                     {
                         grid_element[i].classList.add("animateShield");
-                        revealMushrooms_full();
+                        revealMushrooms_full(true);
                         break;
                     }
                     case 3:
@@ -67,7 +148,7 @@ function create_grid_elements()
                 }
                 canReveal = false;
                 mainBoard[i] = 0;
-                setTimeout(function(){ canReveal = true; }, 100);
+                setTimeout(function(){ canReveal = true; }, 300);
                 
             }
         });
@@ -123,7 +204,6 @@ let poison_UI = document.querySelector("#poison_UI");
 let shield_UI = document.querySelector("#shield_UI");
 let nothing_UI = document.querySelector("#nothing_UI");
 
-
 randomLevel();
 
 function load_mainArray(a)
@@ -165,7 +245,6 @@ function load_goldenArray(a)
     {
         shuffleArray(a);
     }
-    console.log(randPoints);
 }
 
 function load_mainParameters()
@@ -234,7 +313,7 @@ function f_mushroom_nothing(i)
                 {
                     grid_element[i].classList.add("animateShield");
                     grid_element[i].classList.add("opacityReduced");
-                    revealMushrooms_full();
+                    revealMushrooms_full(true);
                     break;
                 }
                 case 3:
@@ -299,7 +378,16 @@ function show_UI()
             life_UI.appendChild(created_image);
         }
     }
-
+/*
+    if(story_level == true)
+    {
+        text_UI[text_UI.length-1].innerHTML = "Level " + selected_level.value;
+    }
+    else
+    {
+        text_UI[text_UI.length-1].innerHTML = "Random Level";
+    }
+*/
 }
 
 function removeTurn()
@@ -316,20 +404,18 @@ function loseGame()
 {
     show_UI();
     text_UI[text_UI.length-1].innerHTML = "You lose!";
-    removeClass();
     revealMushrooms();
     disableMushrooms();
-    //setTimeout(function(){ window.location.reload(true); }, 3000);
+    check_level();
 }
 
 function winGame()
 {
     show_UI();
     text_UI[text_UI.length-1].innerHTML = "You win!";
-    removeClass();
     revealMushrooms();
     disableMushrooms();
-    //setTimeout(function(){ window.location.reload(true); }, 3000);
+    check_level();
 }
 
 function revealMushrooms()
@@ -371,39 +457,80 @@ function revealMushrooms()
     }
 }
 
-function revealMushrooms_full()
+function revealMushrooms_full(mushroomActivated)
 {
-    for(let i = 0; i < grid_element.length; i++)
+    //let selected_element = document.querySelectorAll(".selected_element");
+    if(mushroomActivated == true)
     {
-        switch(realBoard[i])
+        for(let i = 0; i < grid_element.length; i++)
         {
-            case 0:
+            if(!grid_element[i].classList.contains('selected_element'))
             {
-               
-                break;
-            }
-            case 1:
-            {
-                grid_element[i].classList.add("animateNothing_full");
-                break;
-            }
-            case 2:
-            {
-                grid_element[i].classList.add("animateShield_full");
-                break;
-            }
-            case 3:
-            {
-                grid_element[i].classList.add("animatePoison_full");
-                break;
-            }
-            case 4:
-            {
-                grid_element[i].classList.add("animateGolden_full");
-                break;
-            }
-        } 
+                switch(realBoard[i])
+                {
+                    case 0:
+                    {
+                        break;
+                    }
+                    case 1:
+                    {
+                        grid_element[i].classList.add("animateNothing_full");
+                        break;
+                    }
+                    case 2:
+                    {
+                        grid_element[i].classList.add("animateShield_full");
+                        break;
+                    }
+                    case 3:
+                    {
+                        grid_element[i].classList.add("animatePoison_full");
+                        break;
+                    }
+                    case 4:
+                    {
+                        grid_element[i].classList.add("animateGolden_full");
+                        break;
+                    }
+                } 
+            } 
+        }
     }
+    else
+    {
+        for(let i = 0; i < grid_element.length; i++)
+        {
+            switch(realBoard[i])
+            {
+                case 0:
+                {
+                   
+                    break;
+                }
+                case 1:
+                {
+                    grid_element[i].classList.add("animateNothing_full");
+                    break;
+                }
+                case 2:
+                {
+                    grid_element[i].classList.add("animateShield_full");
+                    break;
+                }
+                case 3:
+                {
+                    grid_element[i].classList.add("animatePoison_full");
+                    break;
+                }
+                case 4:
+                {
+                    grid_element[i].classList.add("animateGolden_full");
+                    break;
+                }
+            } 
+        }
+    }
+    
 }
 
 function revealMushrooms_radar()
@@ -464,6 +591,8 @@ function enableMushrooms()
 function resetBoard()
 {
     mainBoard.splice(0, mainBoard.length);
+    realBoard.splice(0, realBoard.length);
+    goldenBoard.splice(0, goldenBoard.length);
 }
 
 show_UI();
@@ -472,7 +601,7 @@ function restartLevel()
 {
     shuffleArray(realBoard);
     mainBoard = [...realBoard];
-    revealMushrooms_full();
+    revealMushrooms_full(false);
     removeClass();
     removeClassOpacity();
     resetParameters();
@@ -481,21 +610,43 @@ function restartLevel()
 
 function randomLevel()
 {
+    story_level = false; 
     resetBoard();
+    removeClass();
+    removeClassOpacity();
     load_goldenArray(goldenBoard);
-    /*
-    mushroom_nothing = 6;
-    mushroom_shield = 6;
-    mushroom_poison = 6;
-    mushroom_golden = 7;
-    */
     load_mainParameters();
     load_mainArray(realBoard);
     shuffleArray(realBoard);
     mainBoard = [...realBoard];
-    revealMushrooms_full();
+    revealMushrooms_full(false);
     resetParameters();
     show_UI();
+    modal[0].style.display = "none";
+}
+
+function generateLevel()
+{
+    story_level = true; 
+    resetBoard();
+    removeClass();
+    removeClassOpacity();
+    let selected_level = document.querySelector("#selected_level").value;
+    goldenBoard.push(levels[selected_level-1][0]); 
+    goldenBoard.push(levels[selected_level-1][1]); 
+    goldenBoard.push(levels[selected_level-1][2]); 
+    goldenBoard.push(levels[selected_level-1][3]); 
+    load_mainParameters();
+    load_mainArray(realBoard);
+    shuffleArray(realBoard);
+    mainBoard = [...realBoard];
+    revealMushrooms_full(false);
+    resetParameters();
+    randTurns = levels[selected_level-1][4];
+    turns = randTurns;
+    show_UI();
+    curLevel = level_reached;
+    modal[0].style.display = "none";
 }
 
 function removeClass()
@@ -540,29 +691,42 @@ function resetParameters()
     text_UI[text_UI.length-1].innerHTML = "";
 }
 
-revealMushrooms_full();
-
-// Get the modal
-var modal = document.getElementsByClassName('modal');
-
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close");
-
-// When the user clicks on <span> (x), close the modal
-span[0].onclick = function() {
-    modal[0].style.display = "none";
+function setMaxLevel()
+{
+    let selected_level = document.getElementById("selected_level");
+    let selected_max_level = level_reached.toString();
+    selected_level.setAttribute("max",level_reached);
+    selected_level.value = selected_max_level;
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+function save_progress()
+{
+    localStorage.setItem("level_reached", level_reached);
+}
+
+function levelSolved()
+{
+    level_reached++;
+    save_progress();
+}
+
+function check_level()
+{
+    let selected_level = document.getElementById("selected_level").value;
+    if(story_level == true && selected_level == curLevel && level_reached < levels.length)
+    {
+        levelSolved();
+        setMaxLevel();
     }
 }
-/*
-window.onload = function(event) 
+
+function resetLevel()
 {
-  modal[0].style.display = "block";
+    level_reached = 1;
+    localStorage.setItem("level_reached", level_reached);
+    setMaxLevel();
 }
-*/
+
+revealMushrooms_full();
+
+
