@@ -343,7 +343,7 @@ function f_mushroom_golden()
     console.log("sending show_UI");
     if(golden_find == mushroom_golden)
     {
-        show_UI(true, "You win!");
+        show_UI(true, "You win! No bugs found!");
     }
     else
     {
@@ -359,7 +359,7 @@ function f_mushroom_poison()
     console.log("sending show_UI");
     if(turns <= 0)
     {
-        show_UI(true, "You lose!");
+        show_UI(true, "You lose! You found bugs...");
     }
     else
     {
@@ -712,7 +712,7 @@ function editedLevel()
         turns = randTurns;
         curLevel = selected_level;
         console.log("sending show_UI");
-        show_UI(true, "You win!");
+        show_UI(true, "Random Level");
         modal[2].style.display = "none";
     }
 }
