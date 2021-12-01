@@ -4,10 +4,6 @@ body
     background-image: url(img/mushroom_field.png);
     background-repeat: repeat;
     font-family: "josefin";
-<<<<<<< HEAD
-    overflow: hidden;
-=======
->>>>>>> e223adcb3c7270dd5366bffbb90d254807b579df
 }
 
 @font-face {
@@ -29,7 +25,7 @@ body
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 5px;
+    grid-gap: 10px;
 }
 
 .grid_element
@@ -411,11 +407,11 @@ body
   
   /* Modal Content */
   .modal-content {
-    border-radius: 20px;
     position: relative;
-    background-color: rgb(236, 241, 236);
+    background-color: lightyellow;
     margin: auto;
     padding: 0;
+    border: 1px solid #888;
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -454,27 +450,22 @@ body
   
   .modal-header {
     padding: 2px 16px;
-    background-color: #2c9631;
+    background-color: forestgreen;
     color: white;
     text-align: center;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-
   }
   
   .modal-body 
   {
     padding: 2px 16px;
     text-align: center;
-}
+  }
   
   .modal-footer {
     padding: 2px 16px;
-    background-color: #2c9631;
+    background-color: forestgreen;
     color: white;
     text-align: center;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
   }
 
   .memory_nothing
